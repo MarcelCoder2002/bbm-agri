@@ -10,6 +10,7 @@ import yaml
 from yaml.loader import SafeLoader
 
 from config.settings import APP_CONFIG
+from database.models import init_database
 # Import des modules locaux
 from database.operations import DatabaseManager
 
@@ -79,6 +80,7 @@ class Page(ABC):
 
 	def run(self):
 		"""Lance l'application"""
+		init_database()
 		self.render()
 		with st.sidebar:
 			if st.session_state.get('authentication_status'):

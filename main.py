@@ -7,7 +7,6 @@ import streamlit as st
 
 # Import des modules locaux
 from config.settings import APP_CONFIG, AUTH_ACTIONS
-from database.models import init_database
 
 # Configuration de la page
 st.set_page_config(**APP_CONFIG)
@@ -32,7 +31,5 @@ if authentication_status:
 		pages['Compte'].append(st.Page('./views/auth/update_user_details.py', title='Mise à jour des informations', icon=":material/account_circle:"))
 
 if __name__ == '__main__':
-	init_database()
-
 	app = st.navigation(pages)
 	app.run()

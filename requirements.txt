@@ -4,3 +4,4 @@ matplotlib~=3.10.3
 SQLAlchemy~=2.0.42
 PyYAML~=6.0.2
 plotly~=6.2.0
+streamlit-authenticator~=0.4.2
