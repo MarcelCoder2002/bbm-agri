@@ -9,7 +9,6 @@ class ForgotPasswordPage(Page):
 			(username_of_forgotten_password,
 			 email_of_forgotten_password,
 			 new_random_password) = self.authenticator.forgot_password(
-				two_factor_auth=True,
 				fields={'Form name': 'Mot de passe oublié', 'Username': 'Nom d\'utilisateur', 'Submit': 'Soumettre',
 				        'Dialog name': 'Code de vérification', 'Code': 'Code',
 				        'Error': 'Le code est incorrect'

@@ -15,7 +15,7 @@ class RegisterPage(Page):
 		try:
 			(email_of_registered_user,
 			 username_of_registered_user,
-			 name_of_registered_user) = self.authenticator.register_user(two_factor_auth=True, captcha=False, password_hint=False, fields={
+			 name_of_registered_user) = self.authenticator.register_user(captcha=False, password_hint=False, fields={
 				'Form name': 'Inscription', 'First name': 'Prénom',
 				'Last name': 'Nom', 'Email': 'Adresse e-mail', 'Username': 'Nom d\'utilisateur',
 				'Password': 'Mot de passe', 'Repeat password': 'Confirmer le mot de passe',
