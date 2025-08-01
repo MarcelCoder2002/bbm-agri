@@ -1,42 +1,38 @@
+"""
+Application Streamlit avec authentification et base de données
+Structure modulaire avec streamlit-authenticator
+"""
+
 import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
 
-st.title("📊 Analyse d'un fichier CSV produit depuis un PDF")
+# Import des modules locaux
+from config.settings import APP_CONFIG, AUTH_ACTIONS
+from database.models import init_database
 
-# Étape 1 : Upload CSV
-uploaded_file = st.file_uploader("📤 Déposez votre fichier CSV", type="csv")
+# Configuration de la page
+st.set_page_config(**APP_CONFIG)
 
-if uploaded_file:
-    try:
-        df = pd.read_csv(uploaded_file)
-        st.success("✅ Fichier chargé avec succès !")
-        st.write("Aperçu des données :", df)
+pages = {
+	'Compte': []
+}
+authentication_status = st.session_state.get('authentication_status')
 
-        # Étape 2 : Nettoyage automatique si nécessaire
-        df.columns = [col.strip().lower() for col in df.columns]
-        if "stock" in df.columns:
-            df["stock"] = (
-                df["stock"]
-                .astype(str)
-                .str.replace(",", ".")
-                .str.replace(" ", "")
-                .astype(float)
-            )
-        else:
-            st.warning("Colonne 'stock' non trouvée dans le fichier.")
-            st.stop()
+if not authentication_status:
+	if 'login' in AUTH_ACTIONS:
+		pages['Compte'].append(st.Page('views/auth/login.py', title='Connexion', icon=":material/login:"))
+	if 'register' in AUTH_ACTIONS:
+		pages['Compte'].append(st.Page('views/auth/register.py', title='Inscription', icon=":material/app_registration:"))
+	if 'forgot_password' in AUTH_ACTIONS:
+		pages['Compte'].append(st.Page('views/auth/forgot_password.py', title='Mot de passe oublié', icon=":material/password:"))
 
-        # Étape 3 : Graphique interactif
-        st.subheader("📈 Top 10 produits selon le stock")
-        top = df.sort_values("stock", ascending=False).head(10)
+if authentication_status:
+	if 'reset_password' in AUTH_ACTIONS:
+		pages['Compte'].append(st.Page('./views/auth/reset_password.py', title='Réinitialiser le mot de passe', icon=":material/password:"))
+	if 'update_user_details' in AUTH_ACTIONS:
+		pages['Compte'].append(st.Page('./views/auth/update_user_details.py', title='Mise à jour des informations', icon=":material/account_circle:"))
 
-        fig, ax = plt.subplots(figsize=(10, 5))
-        ax.barh(top["nom commercial"], top["stock"], color="skyblue")
-        ax.set_xlabel("Stock")
-        ax.set_title("Top 10 des produits par stock")
-        ax.invert_yaxis()
-        st.pyplot(fig)
+if __name__ == '__main__':
+	init_database()
 
-    except Exception as e:
-        st.error(f"Erreur de traitement du fichier : {e}")
+	app = st.navigation(pages)
+	app.run()
