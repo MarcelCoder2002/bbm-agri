@@ -36,13 +36,7 @@ class Page(ABC):
 			# Configuration par défaut si le fichier n'existe pas
 			self.config = {
 				'credentials': {
-					'usernames': {
-						'admin': {
-							'email': 'admin@example.com',
-							'name': 'Administrateur',
-							'password': 'admin123'  # Sera hashé automatiquement
-						}
-					}
+					'usernames': {}
 				},
 				'cookie': {
 					'name': 'streamlit_auth_cookie',
