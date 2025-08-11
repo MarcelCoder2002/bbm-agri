@@ -12,11 +12,6 @@ AUTH_ACTIONS = [
     'reset_password', 'update_user_details'
 ]
 
-DATABASE_CONFIG = {
-    "url": "sqlite:///app_database.db",
-    "echo": False
-}
-
 # Categories par défaut
 DEFAULT_CATEGORIES = [
     "Personnel", "Travail", "Projet", "Idée",
