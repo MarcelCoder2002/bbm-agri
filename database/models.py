@@ -70,7 +70,7 @@ class StockRecord(Base):
 	stocks = relationship("Stock", back_populates="stock_record")
 
 	def __str__(self):
-		return f"{self.sales_department} ({self.start_date.strftime("%d/%m/%Y")} - {self.end_date.strftime("%d/%m/%Y")})"
+		return f"{self.sales_department} ({self.start_date.strftime('%d/%m/%Y')} - {self.end_date.strftime('%d/%m/%Y')})"
 
 
 class Stock(Base):
