@@ -2,7 +2,7 @@ from yaml import dump, load, SafeLoader
 
 
 class Config:
-	config_file = 'config.yaml'
+	config_file = 'app/config.yaml'
 	config = None
 
 	@classmethod
