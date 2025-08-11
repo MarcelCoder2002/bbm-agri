@@ -18,6 +18,7 @@ class Auth:
 		"""Charge l'authentificateur"""
 		if not Config.config:
 			Config.load_config()
+		print(Config.config)
 		stauth.Hasher.hash_passwords(Config.config['credentials'])
 
 		# Création de l'authentificateur
