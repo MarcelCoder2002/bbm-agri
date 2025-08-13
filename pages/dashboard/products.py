@@ -177,12 +177,13 @@ class Page(BasePage):
 		df = pd.DataFrame(data)
 
 		# Créer un nom de produit unique combinant nom + quantité + unité
-		df['product_full_name'] = df.apply(
-			lambda row: f"{row['product_name']} {row['product_quantity']}{row['product_unit']}"
-			if pd.notna(row['product_quantity']) and pd.notna(row['product_unit'])
-			else row['product_name'],
-			axis=1
-		)
+		if not df.empty:
+			df['product_full_name'] = df.apply(
+				lambda row: f"{row['product_name']} {row['product_quantity']}{row['product_unit']}"
+				if pd.notna(row['product_quantity']) and pd.notna(row['product_unit'])
+				else row['product_name'],
+				axis=1
+			)
 
 		return df
 

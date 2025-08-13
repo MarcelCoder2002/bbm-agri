@@ -19,7 +19,7 @@ class User(Base):
 	first_name = Column(String(100), nullable=False, info={'label': 'Prénom'})
 	last_name = Column(String(200), nullable=False, info={'label': 'Nom'})
 	password = Column(String(100), nullable=False, info={'label': 'Mot de passe'})
-	roles = Column(String(100), nullable=False, info={'label': 'Rôles'})
+	roles = Column(JSON, nullable=False, info={'label': 'Rôles'})
 	created_at = Column(DateTime, default=datetime.utcnow, info={'label': "Date d'enregistrement"})
 
 	def __str__(self):
